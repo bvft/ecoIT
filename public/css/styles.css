@@ -1,0 +1,486 @@
+:root
+{
+  --bckg-color: #1CAC70;
+  --Snd-bckg-color: #ACE1A0;
+}
+
+body {
+    font-size: xx-large;
+}
+header section {
+    background-color: var(--bckg-color);
+}
+.img_cover img {
+    width: 100%;
+    height: 100%;
+}
+.img_content {
+    width: 150px;
+    height: 150px;
+}
+.header_nav {
+    width: 100%;
+}
+.nav_content {
+    background-color: var(--Snd-bckg-color);
+    padding: 0.5em;
+}
+.nav_content nav ul {
+    margin: 0;
+    padding: 0.5em;
+}
+.nav_content nav ul li:last-child {
+    margin-left: auto;
+}
+ul {
+    list-style-type: none;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+.nav_content nav ul li {
+    width: 200px;
+    font-size: xx-large;
+}
+.nav_content nav ul li:first-child {
+    text-align: center;
+}
+.welcome h4 {
+    letter-spacing: 0.1em;
+}
+.welcome p {
+    font-size: 0.8em;
+}
+.rf_content {
+    flex-direction: column;
+}
+.rf_content article {
+    background-color: var(--bckg-color);
+}
+.rf_title {
+    background-color: var(--Snd-bckg-color);
+}
+.rfchic_img {
+    width: 90%;
+}
+.rfc_b {
+    background-color: white;
+}
+.rfcf_content a {
+    background-color: var(--Snd-bckg-color);
+}
+.visitor_infos {
+    flex-direction: column;
+}
+.vich_title h3 {
+    font-size: 1.2em;
+}
+.visitor_infos article:first-child {
+    background: linear-gradient(180deg, rgba(0,73,80,1) 0%, rgba(255,255,255,1) 100%);
+}
+.visitor_infos article:last-child {
+    background: linear-gradient(0deg, rgba(0,73,80,1) 0%, rgba(255,255,255,1) 100%);
+}
+.vich_student {
+    background-color: var(--bckg-color);
+}
+.vich_teacher {
+    background-color: var(--Snd-bckg-color);
+}
+.vicbic_img {
+    height: 300px;
+}
+.vicb_content {
+    height: 200px;
+    width: 90%;
+}
+.vicbc_student {
+    background-color: var(--bckg-color);
+}
+.vicbc_teacher {
+    background-color: var(--Snd-bckg-color);
+}
+.vic_f {
+    height: 100px;
+}
+.vicfc_student {
+    background-color: var(--Snd-bckg-color);
+}
+.vicfc_teacher {
+    background-color: var(--bckg-color);
+}
+footer section {
+    background-color: #666;
+    flex-direction: column;
+    gap: 30px;
+}
+footer ul {
+    margin: 0;
+    padding: 0;
+}
+.footer_network {
+    justify-content: center;
+}
+.footer_infos {
+    margin-top: 1em;
+}
+.infos_content ul {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+}
+.network_content nav {
+    margin-right: 20px;
+}
+.search_formation_content {
+    width: 90%;
+}
+.search_fc input {
+    width: 100%;
+    text-align: center;
+    letter-spacing: 0.2em;
+}
+.f_rubrics_content {
+    flex-direction: column;
+}
+.f_rubrics_content article {
+    border: 1px solid bisque;
+    padding: 0.5em;
+}
+.frcfc_img {
+    width: 35%;
+    height: 230px;
+}
+.frcfc_infos {
+    width: 57%;
+}
+.student_info_formation {
+    width: 8%;
+}
+.sifc_status {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+}
+.sifcs_ongoing {
+    background-color: blue;
+}
+.sifcs_ended {
+    background-color: green;
+}
+.bgin_sec {
+    margin-left: 0.5em;
+}
+.lesson_home a {
+    border-radius: 100%;
+}
+.ctn_content ul li a, .ctn_content ul li span {
+    background-color: gray;
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+.ctn_content ul li a.course_completed {
+    background-color: green;
+}
+.ctn_content ul li a.course_playing {
+    background-color: orange;
+}
+.fcc_content {
+    background-color: var(--Snd-bckg-color);
+}
+.fcc_content_sommary ul {
+    margin: 0;
+    padding: 0;
+}
+.fcc_content_sommary ul > li {
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 0.5em;
+}
+.start_course a {
+    background-color: var(--bckg-color);
+}
+.course_btn_content button {
+    background-color: var(--bckg-color);
+    border: none;
+    padding: 0.2em;
+}
+.fcccc_content {
+    overflow: auto;
+    max-height: 80vh;
+}
+.right_arrow {
+    margin-left: auto;
+}
+.arrow_style a {
+    background-color: var(--bckg-color);
+    padding: 0.5em;
+}
+.form_connect, .form_registration {
+    background-color: var(--Snd-bckg-color);
+    margin: 1em;
+    padding: 1em;
+}
+.form_connect form, .form_registration form,
+.form_global form {
+    width: 100%;
+}
+.w_instructor {
+    flex-direction: column-reverse;
+}
+.ipc_content {
+    width: 200px;
+    height: 200px;
+}
+.admin_container {
+    flex-direction: column;
+}
+.admin_content_nav {
+    background-color: var(--bckg-color);
+    height: min-content;
+    min-height: 200px;
+}
+.admin_content ul {
+    margin: 0;
+    padding: 0;
+}
+.admin_content_bloc {
+    background-color: var(--Snd-bckg-color);
+    height: min-content;
+}
+.acb_stat_content ul {
+    flex-direction: column;
+}
+.acb_stat_content li {
+    background-color: var(--bckg-color);
+    width: 50%;
+}
+.acbsc_stat p:last-child {
+    font-size: 2em;
+    font-weight: bold;
+}
+.acb_show_content li {
+    background-color: var(--bckg-color);
+    width: 360px;
+}
+.acbscsc_img {
+    width: 80px;
+    height: 100px;
+}
+.acbscsc_infos, .acbscic_infos {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.acb_show_content ul {
+    flex-direction: column;
+}
+.acbscic_img {
+    width: 200px;
+    height: 250px;
+}
+.acbsc_container {
+    flex-direction: column;
+}
+#actions_admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.form_global {
+    background-color: var(--Snd-bckg-color);
+    /*width: 77%;*/
+    padding: 1em;
+}
+.ifcic_img {
+    width: 200px;
+    height: 150px;
+}
+.formations_content_style {
+    background-color: var(--bckg-color);
+    width: 100%;
+}
+.acb_formations_content ul {
+    flex-direction: column;
+}
+.instructor_formations_content {
+    flex-direction: column;
+}
+.form_global ul {
+    padding: 0;
+    margin: 0;
+}
+.sections_f {
+    flex-direction: column;
+}
+.sections_f li {
+    width: 245px;
+    background-color: var(--bckg-color);
+}
+.link_create {
+    background-color: var(--bckg-color);
+}
+.form-check .form-check-input {
+    float: inherit;
+}
+.quiz_wrong_answer {
+    color: red;
+}
+
+@media screen and (max-width: 400px) and (min-height: 701px) and (max-height: 800px){
+    body {
+        font-size: inherit;
+    }
+    .img_content {
+        width: 50px;
+        height: 50px;
+    }
+    .nav_content nav ul li {
+        width: 120px;
+        font-size: initial;
+    }
+    .rfchic_img {
+        height: 250px;
+    }
+    .ctn_content ul li a, .ctn_content ul li span {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media screen and (min-width: 1000px){
+    body {
+        font-size: inherit;
+    }
+    header section {
+        display: flex;
+    }
+    .header_logo {
+        width: 30%;
+    }
+    .header_nav {
+        width: 70%;
+    }
+    .nav_content nav ul li {
+        font-size: initial;
+    }
+    .welcome h4 {
+        letter-spacing: 0.2em;
+    }
+    .rf_content {
+        flex-direction: row;
+    }
+    .rfchic_img {
+        width: 90%;
+        height: 350px;
+    }
+    .visitor_infos {
+        flex-direction: row;
+    }
+    .vich_title h3 {
+        font-size: initial;
+    }
+    .visitor_infos article {
+        width: 50%;
+    }
+    .visitor_infos article:first-child {
+        background: linear-gradient(90deg, rgba(0,73,80,1) 0%, rgba(255,255,255,1) 100%);
+    }
+    .visitor_infos article:last-child {
+        background: linear-gradient(-90deg, rgba(0,73,80,1) 0%, rgba(255,255,255,1) 100%);
+    }
+    .vicbic_img {
+        height: 500px;
+    }
+    .vicb_content {
+        width: 50%;
+    }
+    footer section {
+        flex-direction: row;
+        gap: 10px;
+    }
+    .footer_content {
+        width: 50%;
+    }
+    .infos_content ul {
+        flex-direction: row;
+        gap: 50px;
+        text-align: initial;
+    }
+    .footer_infos {
+        margin-top: inherit;
+    }
+    .footer_network {
+        justify-content: end;
+    }
+    .search_formation_content {
+        width: 50%;
+    }
+    .f_rubrics_content {
+        flex-direction: row;
+    }
+    .f_rubrics_content article {
+        width: 40%;
+    }
+    .formation_course_content {
+        padding: 3em;
+    }
+    .form_connect, .form_registration {
+        margin: 3em;
+    }
+    .form_global {
+        width: 77%;
+    }
+    .form_connect form, .form_registration form,
+    .form_global form {
+        width: 50%;
+    }
+    .w_instructor {
+        flex-direction: row;
+    }
+    .w_instructor article:first-child {
+        width: 85%;
+    }
+    .w_instructor article:last-child {
+        margin-left: auto;
+    }
+    .admin_container {
+        flex-direction: row;
+    }
+    .acb_stat_content ul {
+        flex-direction: row;
+    }
+    .acb_stat_content li {
+        width: 20%;
+    }
+    .acb_show_content ul {
+        flex-direction: row;
+    }
+    .acbsc_actions_content {
+        margin-left: auto;
+    }
+    .acbsc_container {
+        flex-direction: row;
+    }
+    .admin_content_bloc {
+        /*max-width: 77vw;*/
+        width: 77vw;
+    }
+    .formations_content_style {
+        width: 49%;
+    }
+    .acb_formations_content ul {
+        flex-direction: row;
+    }
+    .instructor_formations_content {
+        flex-direction: row;
+    }
+    .sections_f {
+        flex-direction: row;
+    }
+    .form_global.form_wysig form {
+        width: initial;
+    }
+}

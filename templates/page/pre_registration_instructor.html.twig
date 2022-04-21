@@ -1,0 +1,56 @@
+{# templates/page/pre_registration_instructor.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}EcoIT : Pré-inscription formateur{% endblock %}
+
+{% block body %}
+    <main>
+        <section class="text-center p-2">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {% for message in app.flashes('error_intern') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            <h1>Devenir formateur</h1>
+
+            <h3>Devenir formateur, la bonne initiative</h3>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed pretium vitae lacus convallis elementum. Vivamus pretium est eu arcu eleifend congue.
+            Vestibulum neque justo, dapibus vitae elit eget, viverra aliquet nisl.
+            Etiam mattis ante vitae est porta tempus. Praesent vitae sapien a ipsum malesuada maximus
+             in eu enim. Nulla sollicitudin purus id dui molestie posuere. 
+             Fusce hendrerit condimentum finibus. In hac habitasse platea dictumst.</p>
+
+            <p>Sed luctus sapien mauris, in facilisis metus lobortis eu. 
+            Integer nec quam efficitur, iaculis lacus sit amet, feugiat ante. 
+            Maecenas faucibus massa a risus elementum ullamcorper luctus quis nulla. 
+            Morbi quis ullamcorper metus. Phasellus quis nulla eget tellus suscipit volutpat. 
+            Vestibulum molestie ante in hendrerit pellentesque. 
+            Curabitur varius nibh massa, quis viverra mi iaculis a. 
+            Integer porta eleifend leo a facilisis.</p>
+        </section>
+
+        <section class="text-center p-2">
+            <div class="form_registration d-flex align-items-center justify-content-center flex-column">
+                <h5>Convaincu ? Remplissez notre formulaire</h5>
+
+                {% if errors is defined %}
+                    <ul>
+                    {% for error in errors %}
+                        <li>{{ error.message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                
+                {{ form(form) }}
+            </div>
+        </section>
+    </main>
+{% endblock %}

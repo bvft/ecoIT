@@ -1,0 +1,48 @@
+{# templates/page/instructor/sections.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}EcoIT : Sections de formation{% endblock %}
+{% set user =  app.user.personDetails %}
+{% set instructor_details = user.instructorDetails %}
+
+{% block body %}
+    <main>
+        {{ include('page/instructor/welcome.html.twig') }}
+
+        {% if instructor_details.status == 1 %}
+            <section class="admin_container d-flex gap-5">
+                {{ include('page/instructor/nav_instructor.html.twig') }}
+                
+                <div class="form_global d-flex align-items-center justify-content-center flex-column">
+                    <h3 class="text-center">Sections de formation</h3>
+
+                    <p>Chaque cours doit être définit dans une section.</p>
+
+                    {% if formations is defined and formations is not empty %}
+                        <a class="link_create m-2 p-2" href="{{ path('instructor_create_section') }}">Créer une section</a>
+                        
+                        {% if sections is defined and sections is not empty %}
+                            <ul class="sections_f d-flex align-items-center justify-content-center gap-2 text-center flex-wrap">
+
+                            {% for section in sections %}
+                                <li>
+                                    <a href="{{ path('instructor_edit_section_formation', {number_f: section.getFormations().getNumber(), number_s: section.getNumber()}) }}">
+                                        <div>
+                                            <h3>{{ section.getFormations().getTitle() }}</h3>
+                                            <h5>{{ section.getTitle() }}</h5>
+                                        </div>
+                                    </a>
+                                </li>
+                            {% endfor %}
+
+                            </ul>
+                        {% else %}
+                            <p>Vous avez aucune sections de formation.</p>
+                        {% endif %}
+                    {% else %}
+                        <p>Vous avez aucune formation.</p>
+                    {% endif %}
+                </div>
+            </section>
+        {% endif %}
+    </main>
+{% endblock %}

@@ -1,0 +1,30 @@
+{# templates/page/formation.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}EcoIT : {{ current_f.getTitle() }}{% endblock %}
+{% set student = app.user %}
+
+{% block body %}
+    <main>
+        <section class="formation_h d-flex flex-column align-items-center gap-5 mt-3">
+            <div class="formation_title text-center">
+                <h1>{{current_f.getTitle() }}</h1>
+            </div>
+        </section>
+
+        <section class="course_tracking_nav">
+            {{ include('page/course_tracking.html.twig') }}
+        </section>
+
+        <section class="formation_course_content">
+            {% if summary is defined %}
+                {% if summary is same as (true) %}
+                    {{ include('page/summary.html.twig') }}
+                {% else %}
+                    {{ include('page/course_content.html.twig') }}
+                {% endif %}
+            {% else %}
+                <p class="warning text-center">Une erreur est survenue. Nous sommes désolé pour la gêne occasionnée.</p>
+            {% endif %}
+        </section>
+    </main>
+{% endblock %}

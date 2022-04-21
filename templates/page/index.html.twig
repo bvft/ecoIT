@@ -1,0 +1,120 @@
+{# templates/page/index.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}EcoIT : Accueil{% endblock %}
+
+{% block body %}
+    <main>
+        <section class="welcome d-flex align-items-center justify-content-center text-center">
+            <article>
+                <div class="m-3">
+                    <h1>EcoIT</h1>
+                    <h6>Formations<h6>
+                    <h4>Vous souhaite la bienvenue</h4>
+                    <p>Sur son site de formation 100% eco-responsable.</p>
+                </div>
+            </article>
+        </section>
+
+        <section class="recent_formation">
+            <div class="rf_title text-center p-1">
+                <h3>Nos formations les plus récentes</h3>
+            </div>
+
+            <div class="rf_content d-flex align-items-center justify-content-center gap-3">
+                {% if formations is defined and formations is not empty %}
+                    {% for k, formation in formations %}
+                        <article>
+                            <div class="rfc_h p-3">
+                                <div class="rfch_title text-center">
+                                    <h4>{{ formation.title }}</h4>
+                                </div>
+
+                                <div class="rfch_img_content d-flex justify-content-center">
+                                    <div class="rfchic_img img_cover">
+                                        <img src="{{ asset('img/formations/' ~ formation.picture) }}" alt="{{ formation.title }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="rfc_b p-3">
+                                <div class="rfcb_content">
+                                    <p>{{ formation.short_text }}</p>
+                                </div>
+                            </div>
+
+                            <div class="rfc_f p-3">
+                                <div class="rfcf_content text-center">
+                                    <a class="p-2" href="{{ path('formation', {f_N: formation.number}) }}">Voir la formation</a>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+                {% else %}
+                    <p>Aucune formation de disponible.</p>
+                {% endif %}
+            </div>
+        </section>
+
+        <section class="visitor_infos d-flex mt-5 gap-3">
+            <article>
+                <div class="vi_content">
+                    <div class="vic_h vich_student p-2">
+                        <div class="vich_title text-center">
+                            <h3>Vous souhaitez devenir apprenant ?</h3>
+                        </div>
+                    </div>
+
+                    <div class="vic_b d-flex flex-column justify-content-center align-items-center gap-5">
+                        <div class="vicb_img_content">
+                            <div class="vicbic_img img_cover">
+                                <img src="img/student.jpg" alt="image pour apprenant">
+                            </div>
+                        </div>
+
+                        <div class="vicb_content vicbc_student d-flex justify-content-center align-items-center">
+                            <div class="vicbc_text text-center">
+                                <p>Un petit texte d'explication des avantages à s'inscrire chez EcoIT.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vic_f d-flex justify-content-center align-items-center">
+                        <div class="vicf_content vicfc_student d-flex justify-content-center align-items-center">
+                            <a class="p-2" href="{{ path('pre_registration_student') }}">Se pré-inscrire</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article>
+                <div class="vi_content">
+                    <div class="vic_h vich_teacher p-2">
+                        <div class="vich_title text-center">
+                            <h3>Vous souhaitez devenir formateur ?</h3>
+                        </div>
+                    </div>
+
+                    <div class="vic_b d-flex flex-column justify-content-center align-items-center gap-5">
+                        <div class="vicb_img_content">
+                            <div class="vicbic_img img_cover">
+                                <img src="img/teacher.jpg" alt="image pour formateur">
+                            </div>
+                        </div>
+
+                        <div class="vicb_content vicbc_teacher d-flex justify-content-center align-items-center">
+                            <div class="vicbc_text text-center">
+                                <p>Un petit texte d'explication des avantages à s'inscrire chez EcoIT.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vic_f d-flex justify-content-center align-items-center">
+                        <div class="vicf_content vicfc_teacher d-flex justify-content-center align-items-center">
+                            <a class="p-2" href="{{ path('pre_registration_instructor') }}">Faire une demande</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+{% endblock %}

@@ -1,0 +1,25 @@
+{# templates/page/instructor/h.html.twig #}
+<section class="welcome w_instructor d-flex align-items-center justify-content-center text-center">
+    <article>
+        <h1>Bonjour {{ user.getFirstName() ~ ' ' ~ user.getName() }}</h1>
+        <h4>Vous êtes sur votre compte formateur</h4>
+
+        {% if instructor_details.status is null %}
+            {% set user_status = 'En cours de validation' %}
+        {% elseif  instructor_details.status == 0 %}
+            {% set user_status = 'Refusé' %}
+        {% elseif  instructor_details.status == 1 %}
+            {% set user_status = 'Accepté' %}
+        {% endif %}
+
+        <h5>Votre compte est : {{ user_status }}</h5>
+    </article>
+
+    <article>
+        <div class="instructor_picture_content">
+            <div class="ipc_content img_cover">
+                <img src="{{ asset('img/instructors/' ~ instructor_details.picture) }}" alt="Votre photo de profil">
+            </div>
+        </div>
+    </article>
+</section>

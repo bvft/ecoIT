@@ -1,0 +1,33 @@
+{# templates/page/admin/index.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}EcoIT : Accueil{% endblock %}
+
+{% block body %}
+    <main>
+        {{ include('page/admin/welcome_admin.html.twig') }}
+
+        <section class="admin_container d-flex gap-5">
+            {{ include('page/admin/nav_admin.html.twig') }}
+
+            <div class="admin_content admin_content_bloc p-3">
+                <h3>Quelques stats</h3>
+
+                <div class="acb_stat_content">
+                    {% if stats is defined and stats is not empty %}
+                        <ul class="d-flex gap-2 align-items-center justify-content-center">
+
+                        {% for k, stat in stats %}
+                            <li>
+                                <div class="acbsc_stat text-center p-3">
+                                    <p>{{ stat['roles'][0][5:] }}</p>
+                                    <p>{{ stat[1] }}</p>
+                                </div>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

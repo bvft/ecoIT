@@ -1,0 +1,47 @@
+{# templates/page/footer.html.twig #}
+
+<footer class="mt-5">
+    <section class="d-flex">
+        <div class="footer_content footer_infos d-flex align-items-center justify-content-center">
+            <div class="infos_content">
+                <nav>
+                    <ul class="d-flex">
+                        <li><a href="{{ path('terms_of_use') }}">Conditions d'utilisation</a></li>
+                        <li><a href="{{ path('confidentiality') }}">Confidentialité</a></li>
+                        <li><a href="{{ path('legal_notice') }}">Mentions légales</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="footer_content footer_network d-flex align-items-center">
+            <div class="network_content">
+                <nav>
+                    <ul class="d-flex gap-3">
+                        <li>
+                            <a href="https://fr-fr.facebook.com/">
+                                <div class="network_img img_cover">
+                                    <img src="{{ asset('img/facebook.png') }}" alt="Facebook">
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/">
+                                <div class="network_img img_cover">
+                                    <img src="{{ asset('img/twitter.png') }}" alt="Twitter">
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.youtube.com/">
+                                <div class="network_img img_cover">
+                                    <img src="{{ asset('img/youtube.png') }}" alt="Youtube">
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </section>
+</footer>

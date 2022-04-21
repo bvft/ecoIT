@@ -1,0 +1,54 @@
+{# templates/page/summary.html.twig #}
+{% set section_available = null %}
+
+<div class="fcc_content fcc_content_sommary text-center p-2">
+    <article>
+        <h3>Sommaire de la leçon</h3>
+    </article>
+
+    {% if sections is defined and sections is not empty and courses is defined and courses is not empty %}
+        <article>
+            <ul>
+                {% for key, section in sections %}
+                    <li>{{ section['title'] }}</li>
+                    <ol>
+
+                    {% for k, course in courses[key] %}
+                        {% if course['title'] is not null %}
+                            {% if section_available is null %}
+                                {% set section_available = key %}
+                            {% endif %}
+
+                            <li>{{ course['title'] }}</li>
+                        {% else %}
+                            <li>Prochainement</li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if quizs[key] is defined %}
+                        {% for k, quiz in quizs[key] %}
+                            {% if quiz['title'] is not null %}
+                                <li>Quiz : {{ quiz['title'] }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
+                    </ol>
+                {% endfor %}
+            </ul>
+        </article>
+
+        {% if student is defined and student is not empty %}
+            {% if section_available is not null %}
+                {% set key_first_lesson = courses[section_available]|keys|first %}
+                {# pour le dernier element il me faut récupèrer l'id de la leçon, ce qui veut dire que la pagination est fausse #}
+                <article class="start_course m-5 text-end">
+                    {# On considère qu'une leçon ne commence jamais par un quiz #}
+                    <a class="p-3" href="{{ path('formation_courses', {f_N: current_f.getNumber(), s_N: section_available, id: courses[section_available][key_first_lesson]['id']}, ) }}">Commencer la leçon</a>
+                </article>
+            {% endif %}
+        {% endif %}
+    {% else %}
+        <p>La formation sera bientôt disponible. Merci de votre patience.</p>
+    {% endif %}
+</div>

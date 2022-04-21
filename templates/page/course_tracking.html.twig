@@ -1,0 +1,79 @@
+{# templates/page/course_tracking.html.twig #}
+
+<div class="ctn_content"> 
+    <nav>
+        {% if sections|length > 0 %}
+            <ul class="d-flex gap-1">
+                <li class="lesson_home"><a href="{{ path('formation', {f_N: current_f.getNumber()}) }}" title="Sommaire de la leçon"></a></li>
+                
+                {% for key, section in sections %}
+                    {% for k, course in courses[key] %}
+                        {% set bgin_sec = '' %}
+                        
+                        {# Si k = 1, début de la section => définition d'une class (sert juste pour le css) 
+                            laisse une marge à chaque début de section
+                        #}
+                        {% if k == 1 %}
+                            {% set bgin_sec = 'class=bgin_sec' %}
+                        {% endif %}
+
+                        <li {{ bgin_sec }}>
+                            {# Si le l'apprenant est connecté : se sera un lien #}
+                            {% if student is defined and student is not empty %}
+                                {% set course_completed = '' %}
+                                
+                                {# Si l'appranant a déjà fait ce cours, on définit une class #}
+                                {% if lessons_status[key] is defined and lessons_status[key][course['id']] is defined %}
+                                    {# Si ça vaut 2 le cours est terminé #}
+                                    {% if lessons_status[key][course['id']] == 2 %}
+                                        {% set course_completed = 'class=course_completed' %}
+                                    {% elseif lessons_status[key][course['id']] == 1 %}
+                                        {% set course_completed = 'class=course_playing' %}
+                                    {% endif %}
+                                {% endif %}
+
+                                {% if course['title'] is not null %}
+                                    <a {{ course_completed }} href="{{ path('formation_courses', {f_N: current_f.getNumber(), s_N: key, id: course['id']}, ) }}" title="{{ course['title'] }}"></a>
+                                {% else %}
+                                    <span title="Prochainement"></span>
+                                {% endif %}
+                            {# sinon se sera une span #}
+                            {% else %}
+                                {% if course['title'] is not null %}
+                                    <span title="{{ course['title'] }}"></span>
+                                {% else %}
+                                    <span title="Prochainement"></span>
+                                {% endif %}
+                            {% endif %}
+                        </li>
+
+                    {% endfor %}
+                    
+                    {# On ajout le quiz à la section concernée, et si il y en a #}
+                    {% if quizs[key] is defined %}
+                        {% for k, quiz in quizs[key] %}
+                            <li>
+                                {% if student is defined and student is not empty %}
+                                    {% set quiz_completed = '' %}
+                                    
+                                    {# Si l'apprenant a déjà fait ce quiz, on définit une class #}
+                                    {% if quizs_status[key] is defined and quiz['id'] in quizs_status[key] %}
+                                        {% set quiz_completed = 'class=course_completed' %}
+                                    {% endif %}
+
+                                    {% if quiz['title'] is not null %}
+                                        <a {{ quiz_completed }} href="{{ path('formation_quizs', {f_N: current_f.getNumber(), s_N: key, id: quiz['id']}, ) }}" title="Quiz : {{ quiz['title'] }}"></a>
+                                    {% endif %}
+                                {% else %}
+                                    {% if quiz['title'] is not null %}
+                                        <span title="Quiz : {{ quiz['title'] }}"></span>
+                                    {% endif %}
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </nav>
+</div>

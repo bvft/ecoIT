@@ -1,0 +1,51 @@
+{# templates/page/instructor/edit.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}EcoIT : Editer une formation{% endblock %}
+{% set user =  app.user.personDetails %}
+{% set instructor_details = user.instructorDetails %}
+
+{% block body %}
+    <main>
+        {% if instructor_details.status == 1 %}
+            <section class="text-center mt-1">
+                 {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+                {% for message in app.flashes('error_intern') %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </section>
+
+            <section class="admin_container d-flex gap-5 mt-5">
+                {{ include('page/instructor/nav_instructor.html.twig') }}
+
+                <div class="form_global d-flex align-items-center justify-content-center flex-column">
+                    <h3>Editer une formation</h3>
+                    
+                    {% if errors is defined %}
+                        <ul>
+                        {% for error in errors %}
+                            <li>{{ error.message }}</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                    
+                    {{ form_start(form) }}
+                        <div id="edit_formation" class="form_formation">
+                            {{ form_row(form.rubrics) }}
+                            {{ form_row(form.title, {'value': formation.getTitle()}) }}
+                            {{ form_row(form.short_text, {'value': formation.getShortText()}) }}
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </section>
+        {% else %}
+            {{ include('page/instructor/welcome.html.twig') }}
+        {% endif %}
+    </main>
+{% endblock %}

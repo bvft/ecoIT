@@ -1,0 +1,57 @@
+{# templates/page/admin/index.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}EcoIT : Les Formateurs{% endblock %}
+
+{% block body %}
+    <main>
+        {{ include('page/admin/welcome_admin.html.twig') }}
+
+        <section class="admin_container d-flex gap-5">
+            {{ include('page/admin/nav_admin.html.twig') }}
+
+            <div class="admin_content admin_content_bloc p-3">
+                <h3>Vos formateurs</h3>
+
+                <div class="acb_show_content">
+                    {% if instructors is defined and instructors is not empty %}
+                        <ul class="d-flex gap-2 align-items-center justify-content-center">
+
+                        {% for k, instructor in instructors %}
+                            <li>
+                                <a href="{{ path('admin_show_instructor', {person: instructor.getPersonDetails().id, id: instructor.id}) }}">
+                                    <div class="acbsc_show text-center p-3">
+                                        <div class="acbscs_content d-flex gap-3">
+                                            <div class="acbscsc_img img_cover">
+                                                <img src="{{ asset('img/instructors/' ~ instructor.picture) }}" alt="Photo de profil"
+                                            </div>
+                                        </div>
+
+                                        <div class="acbscs_content">
+                                            <div class="acbscsc_infos">
+                                                <span>{{ instructor.getPersonDetails().firstName }}</span>
+                                                <span>{{ instructor.getPersonDetails().name }}</span>
+                                            </div>
+                                            
+                                            <div class="acbscsc_status">
+                                                {% if instructor.status is null %}
+                                                    {% set instructor_status = 'En cours de validation' %}
+                                                {% elseif  instructor.status == 0 %}
+                                                    {% set instructor_status = 'Refusé' %}
+                                                {% elseif  instructor.status == 1 %}
+                                                    {% set instructor_status = 'Accepté' %}
+                                                {% endif %}
+
+                                                <span>Statut : {{ instructor_status }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

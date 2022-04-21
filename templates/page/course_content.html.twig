@@ -1,0 +1,123 @@
+{# templates/page/course_content.html.twig #}
+
+<div class="fcc_content fcc_content_course text-center p-2">
+    {% if student is defined and student is not empty and 'ROLE_STUDENT' in student.getRoles() %}
+        {% set course_btn_action = 'Terminer ce cours' %}
+        
+        {% if lessons_status is defined and lessons_status is not empty and current_course is defined %}
+            {% if lessons_status[current_course.getSections().getNumber()] is defined and current_course.getId() in lessons_status[current_course.getSections().getNumber()]|keys %}
+                {% if lessons_status[current_course.getSections().getNumber()][current_course.getId()] == 2 %}
+                    {% set course_btn_action = 'Ce cours n\'est pas terminé' %}
+                {% endif %}
+            {% endif %}
+        {% endif %}
+
+        {#{% if quizs_status is defined and quizs_status is not empty and current_quiz is defined %}
+            {% if quizs_status[current_quiz.getSections().getNumber()] is defined and current_quiz.getId() in quizs_status[current_quiz.getSections().getNumber()] %}
+                {% set course_btn_action = 'Ce quiz n\'est pas terminé' %}
+            {% endif %}
+        {% endif %}#}
+        
+        {# Le bouton est affiché uniquement si c'est un cours. Les quizs sont valider lors de l'envoi du formulaire. #}
+        {% if current_course is defined %}
+            <article>
+                {% if fs is defined and fs is not null and fs.getStatus() == 2 and count_lsqs == count_lq %}
+                    <p>Félicitation vous avez terminé cette formation.</p>
+                {% else %}
+                    {% if count_lq is not null and count_lsqs is not null %}
+                        {% if count_lsqs == count_lq %}
+                            {{ form(form1) }}
+                        {% endif %}
+                    {% endif %}
+                    <div class="course_btn_content text-end">
+                        {{ form_start(form) }}
+                            {% if form.send_update is defined %}
+                                {{ form_row(form.send_update, {label: course_btn_action}) }}
+                            {% elseif form.send_updatable is defined %}
+                                {{ form_row(form.send_updatable, {label: course_btn_action}) }}
+                            {% endif %}
+                        {{ form_end(form) }}
+                    </div>
+                {% endif %}
+            </article>
+        {% endif %}
+
+        <article class="fcccc_content mt-4 p-4">
+            {% if current_course is defined %}
+                <h5>{{ current_course.getTitle() }}</h5>
+            {% elseif current_quiz is defined %}
+                <h5>{{ current_quiz.getTitle() }}</h5>
+            {% endif %}
+            
+            <div>
+                {% if current_course is defined %}
+                    {{ current_course.getContent()|raw }}
+                {% elseif current_quiz is defined %}
+                    {% for message in app.flashes('error_intern') %}
+                        <div class="alert alert-danger">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    
+                    {{ form_start(form) }}
+                        <div id="quiz_student" class="form_formation">
+                            {% if quiz_student is defined and quiz_student is not null and quiz_student is not empty %}
+                                {% for k, answer in quiz_student.getAnswers() %}
+                                    {{ form_row(form[k]) }}
+                                    
+                                    {% if quiz_solution[k] is defined %}
+                                        {% if quiz_solution[k] != answer %}
+                                            <p class="quiz_wrong_answer">Voici la bonne réponse : {{ quiz_solution[k] }}</p>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    {{ form_end(form) }}
+                {% endif %}
+            </div>
+        </article>
+
+        <article>
+            <div class="arrows_content d-flex mt-5 p-4">
+                {% if prev_c is defined and prev_c is not null %}
+                    <div class="left_arrow arrow_style">
+                        <a href="{{ path('formation_courses', {f_N: prev_c.getSections().getFormations().getNumber(), s_N: prev_c.getSections().getNumber(), id: prev_c.getId()}, ) }}">&larr;</a>
+                    </div>
+                 {% elseif prev_q is defined and prev_q is not null %}
+                    <div class="left_arrow arrow_style">
+                            <a href="{{ path('formation_quizs', {f_N: prev_q.getSections().getFormations().getNumber(), s_N: prev_q.getSections().getNumber(), id: prev_q.getId()}, ) }}">&larr;</a>
+                        </div>
+                {% elseif prev_r is defined and prev_r is not null %}
+                    <div class="left_arrow arrow_style">
+                            <a href="{{ path('formation', {f_N: prev_r}) }}">&larr;</a>
+                        </div>
+                {% endif %}
+
+                {% if next_c is defined and next_c is not null %}
+                    <div class="right_arrow arrow_style">
+                        <a href="{{ path('formation_courses', {f_N: next_c.getSections().getFormations().getNumber(), s_N: next_c.getSections().getNumber(), id: next_c.getId()}, ) }}">&rarr;</a>
+                    </div>
+                {% elseif next_q is defined and next_q is not null %}
+                    <div class="right_arrow arrow_style">
+                        <a href="{{ path('formation_quizs', {f_N: next_q.getSections().getFormations().getNumber(), s_N: next_q.getSections().getNumber(), id: next_q.getId()}, ) }}">&rarr;</a>
+                    </div>
+                {% elseif next_r is defined and next_r is not null %}
+                    <div class="right_arrow arrow_style">
+                        <a href="{{ path('formation_courses', {f_N: next_r.getSections().getFormations().getNumber(), s_N: next_r.getSections().getNumber(), id: next_r.getId()}, ) }}">&rarr;</a>
+                    </div>
+                {% endif %}
+            </div>
+        </article>
+    {% else %}
+        <article>
+            <p>Veuillez vous connecter pour profiter de la totalité du cours.</p>
+        </article>
+    {% endif %}
+</div>

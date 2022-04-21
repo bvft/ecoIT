@@ -1,0 +1,32 @@
+{# templates/page/header.html.twig #}
+
+<header>
+    <section>
+        <div class="header_logo d-flex align-items-center justify-content-center">
+            <div class="logo_content">
+                <div class="img_content img_cover">
+                    <a href="{{ path('home') }}">
+                        <img src="{{ asset('img/logo.png') }}" alt="logo EcoIT">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="header_nav">
+            <div class="nav_content">
+                <nav>
+                    <ul class="d-flex align-items-center justify-content-center">
+                        <li><a href="{{ path('formations') }}">Formations</a></li>
+                        <li>
+                            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                            {% else %}
+                                <a href="{{ path('app_login') }}">Se connecter</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </section>
+</header>

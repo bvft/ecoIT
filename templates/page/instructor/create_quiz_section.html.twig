@@ -1,0 +1,57 @@
+{# templates/page/instructor/create_quiz_section.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}EcoIT : Créer un quiz{% endblock %}
+{% set user =  app.user.personDetails %}
+{% set instructor_details = user.instructorDetails %}
+
+{% block body %}
+    <main>
+        {{ include('page/instructor/welcome.html.twig') }}
+
+        {% if instructor_details.status == 1 %}
+            {% for message in app.flashes('error_intern') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %} 
+
+            <section class="admin_container d-flex gap-5">
+                {{ include('page/instructor/nav_instructor.html.twig') }}
+                
+                <div class="form_global d-flex align-items-center justify-content-center flex-column">
+                    <h3 class="text-center">Créer un quiz pour la formation : {{ formation.getTitle() }}</h3>
+                    <h5>De la section : {{ section.getTitle() }}</h5>
+                    
+                    {% if count_lesson is defined and count_lesson is not empty %}
+                        {% if errors is defined %}
+                            <ul>
+                            {% for error in errors %}
+                                <li>{{ error.message }}</li>
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                        
+                        {{ form_start(form) }}
+                            <div id="new_quiz_section" class="form_formation">
+                            {# Si un quiz existe déjà, c'est-à-dire qu'il y a au minimum une question
+                                pour cette section de formation, on pré-rempli le titre
+                             #}
+                                {% if title_quiz is defined and title_quiz is not empty %}
+                                    {{ form_row(form.title, {'value': title_quiz.getTitle()}) }}
+                                {% endif %}
+                            </div>
+                        {{ form_end(form) }}
+                    {% else %}
+                        <p>Vous devez définir un cours pour cette section avant de pouvoir créer un quiz.</p>
+                    {% endif %}
+                </div>
+            </section>
+        {% endif %}
+    </main>
+{% endblock %}

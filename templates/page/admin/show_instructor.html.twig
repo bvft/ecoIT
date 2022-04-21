@@ -1,0 +1,67 @@
+{# templates/page/admin/index.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}EcoIT : Les Formateurs{% endblock %}
+
+{% block body %}
+    <main>
+        {{ include('page/admin/welcome_admin.html.twig') }}
+
+        <section class="admin_container d-flex gap-5">
+            {{ include('page/admin/nav_admin.html.twig') }}
+
+            <div class="admin_content admin_content_bloc p-3">
+                <h3>Edition du formateur</h3>
+
+                <div class="acb_show_content">
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    
+                    {% if instructor is defined and instructor is not empty %}
+                        <div class="acbsc_container d-flex gap-3">
+                            <div class="acbsc_img_content">
+                                <div class="acbscic_img img_cover">
+                                    <img src="{{ asset('img/instructors/' ~ instructor[0].picture) }}" alt="Photo de profil">
+                                </div>
+                            </div>
+
+                            <div class="acbsc_infos_content">
+                                <div class="acbscic_infos">
+                                    <span>{{ instructor[0].getPersonDetails().firstName }}</span>
+                                    <span>{{ instructor[0].getPersonDetails().name }}</span>
+                                </div>
+
+                                <div class="acbscic_status">
+                                    {% if instructor[0].status is null %}
+                                        {% set instructor_status = 'En cours de validation' %}
+                                    {% elseif  instructor[0].status == 0 %}
+                                        {% set instructor_status = 'Refusé' %}
+                                    {% elseif  instructor[0].status == 1 %}
+                                        {% set instructor_status = 'Accepté' %}
+                                    {% endif %}
+
+                                    <span>Statut : {{ instructor_status }}</span>
+                                </div>
+
+                                <div class="acbscic_specs mt-3">
+                                    <span>Ses spécialités :</span>
+                                    <p>{{ instructor[0].descSpecs }}</p>
+                                </div>
+                            </div>
+
+                            <div class="acbsc_actions_content d-flex align-items-center justify-content-center">
+                                <div class="acbscac_btn d-flex flex-column gap-3">
+                                    {{ form(form) }}
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <p>Aucun formateur correspondant à votre recherche.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

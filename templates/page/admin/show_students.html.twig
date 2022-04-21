@@ -1,0 +1,28 @@
+{# templates/page/admin/index.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}EcoIT : Les Formateurs{% endblock %}
+
+{% block body %}
+    <main>
+        {{ include('page/admin/welcome_admin.html.twig') }}
+
+        <section class="admin_container d-flex gap-5">
+            {{ include('page/admin/nav_admin.html.twig') }}
+
+            <div class="admin_content admin_content_bloc p-3">
+                <h3>Vos étudiants</h3>
+
+                <div class="acb_show_content">
+                
+                    {% if students is defined and students is not empty %}
+                        <ul class="d-flex gap-3  align-items-center justify-content-center text-center">
+                            {% for student in students %}
+                               <li>{{ student.pseudo }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

@@ -1,0 +1,103 @@
+{# templates/page/formations.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}EcoIT : Nos Formations{% endblock %}
+
+{% block body %}
+    <main>
+        <section class="formations_h d-flex flex-column align-items-center gap-5 mt-3">
+            <div class="formations_title text-center">
+                <h1>Toutes nos formations disponible actuellement</h1>
+            </div>
+
+            <div class="search_formation_content">
+                <div class="search_fc">
+                    <input id="formations_filter" type="text" name="search_formation" value="" placeholder="Rechercher une formation">
+                </div>
+            </div>
+        </section>
+
+        <section class="formations_help_color m-3">
+            <h6>Aide couleurs</h6>
+
+            <div class="fhc_content">
+                <ul>
+                    <li>
+                        <div class="sif_content d-flex align-items-center gap-2">
+                            <div class="sifc_status sifcs_ongoing"></div>
+                            <div>Formation en cours</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="sif_content d-flex align-items-center gap-2">
+                            <div class="sifc_status sifcs_ended"></div>
+                            <div>Formation terminée</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="formations mt-3 p-2">
+            {% if formations is defined and formations is not empty %}
+                {% for k, formation in formations %}
+                    <section>
+                        <div class="rubrics_title">
+                            <h3>{{ k }}</h3>
+                        </div>
+
+                        <div class="f_rubrics_content d-flex gap-5 justify-content-center">
+                            {% for f in formation %}
+                                <article>
+                                    <a href="{{ path('formation', {f_N: f.number}) }}">
+                                        <div class="frc_formation_content d-flex gap-4">
+                                            <div class="frcfc_img">
+                                                <div class="frcfci_img_content img_cover">
+                                                    <img src="{{ asset('img/formations/' ~ f.picture) }}" alt="{{ f.title }}">
+                                                </div>
+                                            </div>
+
+                                            <div class="frcfc_infos">
+                                                <div class="frcfci_content">
+                                                    <div class="frcfcic_title">
+                                                        <h4>{{ f.title }}</h4>
+                                                    </div>
+
+                                                    <div class="frcfcic_content">
+                                                        <p>{{ f.short_text }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {# Visible uniquement si l'étudiant est connecté #}
+                                            {% if f.id in sfs|keys %}
+                                                <div class="student_info_formation d-flex align-items-center">
+                                                    <div class="sif_content">
+                                                        {% if sfs[f.id]['status'] == 1 %}
+                                                            <div class="sifc_status sifcs_ongoing" title="Formation en cours"></div>
+                                                        {% elseif sfs[f.id]['status'] == 2 %}
+                                                            {% if count_total is defined and count_total is not empty and count_total_student is defined and count_total_student is not empty %}
+                                                                {% if f.id in count_total|keys and f.id in count_total_student|keys %}
+                                                                    {% if count_total[f.id] == count_total_student[f.id] %}
+                                                                        <div class="sifc_status sifcs_ended" title="Formation terminée"></div>
+                                                                    {% else %}
+                                                                        <div class="sifc_status sifcs_ongoing" title="Formation en cours"></div>
+                                                                    {% endif %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </a>
+                                </article>
+                            {% endfor %}
+                        </div>
+                    </section>
+                {% endfor %}
+            {% else %}
+                <p>Aucune formation de disponible.</p>
+            {% endif %}
+        </section>
+    </main>
+{% endblock %}

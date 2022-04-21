@@ -1,0 +1,57 @@
+{# templates/page/instructor/index.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}EcoIT : Accueil{% endblock %}
+{% set user =  app.user.personDetails %}
+{% set instructor_details = user.instructorDetails %}
+
+{% block body %}
+    <main>
+        {{ include('page/instructor/welcome.html.twig') }}
+
+        {% if instructor_details.status == 1 %}
+            <section class="admin_container d-flex gap-5">
+                {{ include('page/instructor/nav_instructor.html.twig') }}
+                
+                <div class="admin_content admin_content_bloc p-3">
+                    <h3 class="text-center">Mes formations</h3>
+
+                    <p>Pour des raisons au bon déroulement du cursus de la formation, vous n'avez pas l'autorisation de supprimer une formation que vous avez créée. Vous devez en faire la demande auprès d'un administrateur.</p>
+
+                    <div class="acb_formations_content">
+                        {% if formations is defined and formations is not empty %}
+                            <ul class="d-flex align-items-center justify-content-center gap-2 flex-wrap">
+
+                            {% for formation in formations %}
+                                <li class="formations_content_style">
+                                    <a href="{{ path('instructor_edit_formation', {number: formation.number}) }}">
+                                        <div class="instructor_formations_content d-flex gap-3">
+                                            <div class="ifc_img_content">
+                                                <div class="ifcic_img img_cover">
+                                                    <img src="{{  asset('img/formations/' ~ formation.picture) }}" alt="Photo de la formation {{ formation.title }}">
+                                                </div>
+                                            </div>
+
+                                            <div class="ifc_infos_content">
+                                                <div class="ifcic_title_content">
+                                                    <h4>{{ formation.title }}</h4>
+                                                </div>
+
+                                                <div class="ifcic_desc_content">
+                                                    <p>{{ formation.shortText }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            {% endfor %}
+
+                            </ul>
+                        {% else %}
+                            <p>Vous avez aucune formation.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+    </main>
+{% endblock %}

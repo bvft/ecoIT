@@ -1,0 +1,55 @@
+{# templates/page/instructor/quizs.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}EcoIT : Quizs{% endblock %}
+{% set user =  app.user.personDetails %}
+{% set instructor_details = user.instructorDetails %}
+
+{% block body %}
+    <main>
+        {{ include('page/instructor/welcome.html.twig') }}
+
+        {% if instructor_details.status == 1 %}
+            <section class="admin_container d-flex gap-5">
+                {{ include('page/instructor/nav_instructor.html.twig') }}
+                
+                <div class="form_global d-flex align-items-center justify-content-center flex-column">
+                    <h3 class="text-center">Quizs de sections de formation</h3>
+
+                    <p>Chaque cours doit être définit dans une section.</p>
+
+                    {% if formations is defined and formations is not empty %}
+                        {% if sections is defined and sections is not empty %}
+                            <a class="link_create m-2 p-2" href="{{ path('instructor_new_course') }}">Créer un quiz</a>
+
+                            {% if quizs is defined and quizs is not empty %}
+                                <ul class="sections_f d-flex align-items-center justify-content-center gap-2 text-center flex-wrap">
+
+                                {% for quiz in quizs %}
+                                    <li>
+                                        <a href="{{ path('instructor_edit_quiz_section', {number_f: quiz.getSections().getFormations().getNumber(), number_s: quiz.getSections().getNumber(), id: quiz.getId()}) }}">
+                                            <div>
+                                                <h3>{{ quiz.getSections().getFormations().getTitle() }}</h3>
+                                                <h5>{{ quiz.getSections().getTitle() }}</h5>
+                                                <h6>{{ quiz.getTitle() }}</h6>
+
+                                                <p>{{ quiz.getQuestion() }}</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+
+                                </ul>
+                            {% else %}
+                                <p>Vous avez aucun quiz.</p>
+                            {% endif %}
+                        {% else %}
+                            <p>Vous avez aucune sections de formation.</p>
+                        {% endif %}
+                    {% else %}
+                        <p>Vous avez aucune formation.</p>
+                    {% endif %}
+                </div>
+            </section>
+        {% endif %}
+    </main>
+{% endblock %}
